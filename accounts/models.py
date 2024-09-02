@@ -28,5 +28,5 @@ class User(AbstractUser):
 
     # 선택입력 필드
     gender = models.CharField("gender", max_length=1, choices=GENDER_CHOICES, blank=True)
-    introduce = models.TextField("introduce", black=True)
+    introduce = models.TextField("introduce", blank=True)
 
