@@ -37,6 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django_extensions',
+
+    'accounts',
+    'products',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +73,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'spartamarket_DRF.wsgi.application'
+
+# 유저 모델을 커스텀 유저 모델로 설정
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Database
