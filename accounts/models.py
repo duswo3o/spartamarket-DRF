@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     """
     username, 비밀번호, 이메일, 이름, 닉네임, 생일은 필수입력
-    성별, 자기소개는 생각가능
+    성별, 자기소개는 생략가능
 
     username과 이메일은 유일해야함
     """
@@ -24,7 +24,7 @@ class User(AbstractUser):
     email = models.EmailField("email_address", unique=True, blank=False)
     name = models.CharField("name", max_length=30)
     nickname = models.CharField("nickname", max_length=20)
-    birthday = models.DateField("birthday")
+    # birthday = models.DateField("birthday", default="2000-01-01")
 
     # 선택입력 필드
     gender = models.CharField("gender", max_length=1, choices=GENDER_CHOICES, blank=True)
