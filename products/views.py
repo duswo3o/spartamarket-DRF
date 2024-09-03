@@ -19,8 +19,7 @@ class ProductAPIView(APIView):
     # 상품 등록
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
