@@ -10,5 +10,5 @@ class Product(models.Model):
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
 
-    author = models.ForeignKey(get_user_model(), related_name="author", on_delete=models.CASCADE)
+    author = models.ForeignKey(get_user_model(), related_name="product", on_delete=models.CASCADE)
 
