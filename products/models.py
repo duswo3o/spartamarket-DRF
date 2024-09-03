@@ -1,3 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+
+class Product(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    image = models.ImageField(upload_to='images/', blank=True)
+
+    created_time = models.DateTimeField(auto_now_add=True)
+    updated_time = models.DateTimeField(auto_now=True)
+
+    author = models.ForeignKey(get_user_model(), related_name="author", on_delete=models.CASCADE)
+
