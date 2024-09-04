@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_seed',
     'rest_framework',
-    'rest_framework_simplejwt',
+    'rest_framework_jwt',
+    'rest_framework_simplejwt.token_blacklist',
 
     # local
     'accounts',
@@ -87,16 +88,15 @@ AUTH_USER_MODEL = "accounts.User"
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ),
 }
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5), # 만료시간
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60), # 만료시간
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
-    "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": False,
-    "UPDATE_LAST_LOGIN": False,
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
 
 
