@@ -37,7 +37,7 @@ class ProductDetailAPIView(APIView):
     # 상품 수정
     def put(self, request, productID):
         product = get_object_or_404(Product, id=productID)
-        serializer = ProductSerializer(instance=product, data=request.data)
+        serializer = ProductSerializer(instance=product, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data)

@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         # write_only : 인스턴스를 생성하거나 수정할 때만 사용
         extra_kwargs = {'password': {"write_only": True}}
 
+    # serializer를 대상으로 save() 메서드를 호출하여 DB 인스턴스를 생성할 때의 동작 정의
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)

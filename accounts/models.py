@@ -24,7 +24,7 @@ class User(AbstractUser):
     email = models.EmailField("email_address", unique=True, blank=False)
     name = models.CharField("name", max_length=30)
     nickname = models.CharField("nickname", max_length=20)
-    # birthday = models.DateField("birthday", default="2000-01-01")
+    birthday = models.DateField("birthday")
 
     # 선택입력 필드
     gender = models.CharField("gender", max_length=1, choices=GENDER_CHOICES, blank=True)
