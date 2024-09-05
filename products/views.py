@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -48,3 +49,17 @@ class ProductDetailAPIView(APIView):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+class ProductLikeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, productID):
+        product = get_object_or_404(Product, id=productID)
+        user = get_user_model().objects.get(id=request.user.id)
+
+        if user in product.like_users.all():
+            product.like_users.remove(user)
+            return Response("unlike", status=status.HTTP_200_OK)
+        else:
+            product.like_users.add(user)
+            return Response("like", status=status.HTTP_200_OK)
