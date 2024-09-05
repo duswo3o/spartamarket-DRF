@@ -54,3 +54,20 @@ class Profile(APIView):
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)
+
+
+class FollowView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self, request, username):
+        me = request.user
+        you = get_object_or_404(get_user_model(), username=username)
+        if me != you:
+            if me in you.followers.all():
+                you.followers.remove(me)
+                return Response("unfollow", status=status.HTTP_200_OK)
+            else:
+                you.followers.add(me)
+                return Response("follow", status=status.HTTP_200_OK)

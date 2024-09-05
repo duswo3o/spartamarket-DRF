@@ -30,3 +30,5 @@ class User(AbstractUser):
     gender = models.CharField("gender", max_length=1, choices=GENDER_CHOICES, blank=True)
     introduce = models.TextField("introduce", blank=True)
 
+    # 팔로우
+    followings = models.ManyToManyField('self', related_name="followers", symmetrical=False)
