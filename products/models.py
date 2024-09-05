@@ -12,3 +12,4 @@ class Product(models.Model):
 
     author = models.ForeignKey(get_user_model(), related_name="product", on_delete=models.CASCADE)
 
+    like_users = models.ManyToManyField(get_user_model(), related_name='like_products')
