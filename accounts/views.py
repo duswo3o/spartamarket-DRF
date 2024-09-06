@@ -25,6 +25,7 @@ class AccountAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)
 
     # 회원탈퇴
     @login_required
@@ -50,7 +51,9 @@ class Profile(APIView):
         # 현재 로그인한 사용자와 조회한 프로필이 같을 때만 수정 가능
         if request.user.username == username:
             my_profile = get_object_or_404(get_user_model(), username=username)
-            serializer = ProfileUpdateSerializer(instance=my_profile, data=request.data, partial=True)
+            serializer = ProfileUpdateSerializer(
+                instance=my_profile, data=request.data, partial=True
+            )
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)

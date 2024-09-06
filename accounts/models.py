@@ -11,10 +11,8 @@ class User(AbstractUser):
 
     username과 이메일은 유일해야함
     """
-    GENDER_CHOICES = [
-        ("M", "남자"),
-        ("W", "여자")
-    ]
+
+    GENDER_CHOICES = [("M", "남자"), ("W", "여자")]
 
     # 장고에서 기본적으로 제공해주는 필드를 제거하기 위해 None으로 정의
     first_name = None
@@ -27,8 +25,12 @@ class User(AbstractUser):
     birthday = models.DateField("birthday")
 
     # 선택입력 필드
-    gender = models.CharField("gender", max_length=1, choices=GENDER_CHOICES, blank=True)
+    gender = models.CharField(
+        "gender", max_length=1, choices=GENDER_CHOICES, blank=True
+    )
     introduce = models.TextField("introduce", blank=True)
 
     # 팔로우
-    followings = models.ManyToManyField('self', related_name="followers", symmetrical=False)
+    followings = models.ManyToManyField(
+        "self", related_name="followers", symmetrical=False
+    )
