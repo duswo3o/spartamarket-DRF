@@ -31,10 +31,19 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        exclude = (
-            "username",
-            "password",
-        )
+        exclude = ("password",)
+
+    def validate_username(self, attrs):
+        username = get_user_model().objects.filter(username=attrs)
+        if username.exists():
+            raise serializers.ValidationError("이미 존재하는 아이디입니다.")
+        return attrs
+
+    def validate_email(self, attrs):
+        email = get_user_model().objects.filter(email=attrs)
+        if email.exists():
+            raise serializers.ValidationError("이미 존재하는 이메일입니다.")
+        return attrs
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
