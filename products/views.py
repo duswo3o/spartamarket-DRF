@@ -38,16 +38,26 @@ class ProductDetailAPIView(APIView):
     # 상품 수정
     def put(self, request, productID):
         product = get_object_or_404(Product, id=productID)
-        serializer = ProductSerializer(instance=product, data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+        writer = product.author
+        if request.user == writer:
+            serializer = ProductSerializer(
+                instance=product, data=request.data, partial=True
+            )
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        else:
+            return Response("수정 권한이 업는 사용자입니다.")
 
     # 상품 삭제
     def delete(self, request, productID):
         product = get_object_or_404(Product, id=productID)
-        product.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        writer = product.author
+        if request.user == writer:
+            product.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response("삭제 권한이 업는 사용자입니다.")
 
 
 class ProductLikeView(APIView):
