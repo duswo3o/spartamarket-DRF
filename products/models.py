@@ -11,12 +11,17 @@ class Product(models.Model):
     updated_time = models.DateTimeField(auto_now=True)
 
     author = models.ForeignKey(
-        get_user_model(), related_name="product", on_delete=models.CASCADE
+        to=get_user_model(), related_name="product", on_delete=models.CASCADE
     )
 
-    like_users = models.ManyToManyField(get_user_model(), related_name="like_products")
+    like_users = models.ManyToManyField(
+        to=get_user_model(),
+        related_name="like_products",
+        blank=True,
+    )
+
     tags = models.ManyToManyField(
-        "products.Hashtag",
+        to="products.Hashtag",
         verbose_name="해시태그 목록",
         blank=True,
         related_name="product_tags",
@@ -27,7 +32,7 @@ class Product(models.Model):
 
 
 class Hashtag(models.Model):
-    tag = models.CharField("tag", max_length=20)
+    tag = models.CharField("tag", max_length=20, unique=True)
 
     def __str__(self):
         return self.tag
