@@ -2,12 +2,14 @@ from django.contrib.auth.hashers import check_password
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import check_password
 
 from django.contrib.auth.decorators import login_required
 
 from .serializers import (
     UserSerializer,
     ProfileUpdateSerializer,
+    UserDeleteSerializer,
 )
 
 from rest_framework import status
@@ -19,6 +21,8 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 # Create your views here.
 class AccountAPIView(APIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
     # 회원가입
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -28,13 +32,16 @@ class AccountAPIView(APIView):
         return Response(serializer.errors)
 
     # 회원탈퇴
-    @login_required
     def delete(self, request):
-        user = get_user_model().objects.get(id=request.user.id)
-        # 비밀번호 재입력 필요
-
-        user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        serializer = UserDeleteSerializer(data=request.data)
+        if serializer.is_valid():
+            if check_password(serializer.data.get("password"), request.user.password):
+                request.user.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                return Response("비밀번호가 일치하지 않습니다.")
+        else:
+            return Response(serializer.errors)
 
 
 class Profile(APIView):
