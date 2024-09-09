@@ -235,7 +235,7 @@
 │  ├─ admin.py
 │  ├─ apps.py
 │  ├─ migrations
-│  ├─ mode
+│  ├─ models.py
 │  ├─ serializers.py
 │  ├─ tests.py
 │  ├─ urls.py
@@ -246,7 +246,7 @@
 │  ├─ admin.py
 │  ├─ apps.py
 │  ├─ migrations
-│  ├─ mod
+│  ├─ models.py
 │  ├─ serializers.py
 │  ├─ tests.py
 │  ├─ urls.py
