@@ -22,7 +22,13 @@
     <details>
       <summary>회원가입</summary>
       <div markdown="1">
-        
+  
+      - endpoint : /api/accounts/
+      - method : POST
+      - 조건 
+        - username, 비밀번호, 이메일, 이름, 닉네임, 생일 필수입력
+        - 성별, 자기소개는 생략 가능
+
     ![image](./spartamarket-readme-img/signup.png)
         
       </div>
@@ -31,6 +37,10 @@
       <details>
       <summary>로그인</summary>
       <div markdown="1">
+  
+      - endpoint : /api/accounts/login/
+      - method : POST
+      - 조건 : 사용자명과 비밀번호 입력 필요
         
     ![image](./spartamarket-readme-img/login.png)
         
@@ -40,6 +50,10 @@
       <details>
       <summary>프로필 조회</summary>
       <div markdown="1">
+  
+      - Endpoint : /api/accounts/&#60;str:username>/
+      - method : POST
+      - 조건 : 로그인 상태 필요
     
       로그인 됐을때 프로필 조회
     
@@ -57,6 +71,10 @@
     <details>
       <summary>상품등록</summary>
       <div markdown="1">
+  
+      - endpoint : /api/products/
+      - method : POST
+      - 조건 : 로그인 상태, 제목과 내용, 상품 이미지 입력 필요
 
       ![image](./spartamarket-readme-img/products-create.png)
 
@@ -66,6 +84,10 @@
       <details>
       <summary>상품 목록 조회</summary>
       <div markdown="1">
+  
+      - endpoint : /api/products/
+      - method : GET
+      - 조건 : 로그인 상태 불필요
 
       상품 목록 조회 (유효한 페이지)
 
@@ -81,6 +103,10 @@
       <details>
       <summary>상품 수정</summary>
       <div markdown="1">
+  
+      - endpoint : /api/products/&#60;int:productID>
+      - method : PUT
+      - 조건 : 로그인 상태, 수정 권한 있는 사용자(게시글 작성자)만 가능
 
       ![image](./spartamarket-readme-img/product-edit.png)
 
@@ -90,6 +116,10 @@
       <details>
       <summary>상품 삭제</summary>
       <div markdown="1">
+  
+      - endpoint : /api/products/&#60;int:productID>
+      - method : PUT
+      - 조건 : 로그인 상태, 수정 권한 있는 사용자(게시글 작성자)만 가능
 
       상품 삭제 (유효한 사용자)
 
@@ -109,6 +139,10 @@
     <details>
       <summary>로그아웃</summary>
       <div markdown="1">
+  
+      - endpoint : /api/accounts/logout/
+      - method : POST
+      - 조건 : 로그인 상태 필요
     
       ![image](./spartamarket-readme-img/accounts-logout.png)
     
@@ -118,6 +152,10 @@
       <details>
       <summary>본인 정보 수정</summary>
       <div markdown="1">
+  
+      - endpoint : /api/accounts/&#60;str:username>
+      - method : PUT
+      - 조건 : 이메일, 이름, 닉네임, 생일 입력 필요하며 성별, 자기소개 생략 가능
    
       ![image](./spartamarket-readme-img/profile-edit.png)
  
@@ -127,6 +165,11 @@
       <details>
       <summary>패스워드 변경</summary>
       <div markdown="1">
+    
+      - endpoint : /api/accounts/password/
+      - method : PUT
+      - 조건 : 기존 패스워드와 변경할 패스워드는 상이해야 함
+    
     [//]: # (      ![image]&#40;./spartamarket-readme-img/products-delete.png&#41;)
       </div>
       </details>
@@ -134,6 +177,10 @@
       <details>
       <summary>회원 탈퇴</summary>
       <div markdown="1">
+  
+      - endpoint : /api/products/
+      - method : DELETE
+      - 조건 : 로그인 상태, 비밀번호 재입력 필요
     
       상품 삭제 (유효한 사용자)
 [//]: # (      ![image]&#40;./spartamarket-readme-img/products-delete.png&#41;)
