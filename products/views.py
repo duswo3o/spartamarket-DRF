@@ -23,9 +23,15 @@ class ProductAPIView(APIView):
         page = request.GET.get("page", "1")
         products_list = Product.objects.all()
         paginator = Paginator(products_list, 10)
-        products = paginator.get_page(page)
-        serializer = ProductSerializer(products, many=True)
-        return Response(serializer.data)
+        if int(page) <= paginator.num_pages:
+            products = paginator.get_page(page)
+            serializer = ProductSerializer(products, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {"detail": "존재하지 않는 페이지입니다"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
 
     # 상품 등록
     def post(self, request):
