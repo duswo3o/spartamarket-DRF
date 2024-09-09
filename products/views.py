@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
+from django.core.paginator import Paginator
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -18,7 +20,10 @@ class ProductAPIView(APIView):
 
     # 상품 목록 조회
     def get(self, request):
-        products = Product.objects.all()
+        page = request.GET.get("page", "1")
+        products_list = Product.objects.all()
+        paginator = Paginator(products_list, 10)
+        products = paginator.get_page(page)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
 
