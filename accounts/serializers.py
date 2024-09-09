@@ -33,6 +33,14 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         exclude = ("password",)
+        extra_kwargs = {
+            "username": {
+                "required": True,
+            },
+            "email": {
+                "required": True,
+            },
+        }
 
     def validate_username(self, attrs):
         username = get_user_model().objects.filter(username=attrs)
@@ -41,7 +49,7 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
         return attrs
 
     def validate_email(self, value):
-        user = self.instance
+        user = self.context
         email = get_user_model().objects.filter(email=value)
         if email.exists():
             raise serializers.ValidationError("이미 존재하는 이메일입니다.")
@@ -60,11 +68,13 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
         fields = ["new_password", "confirm_password", "old_password"]
 
     def validate(self, attrs):
+        # 변경 패스워드 확인 절차
         if attrs["new_password"] != attrs["confirm_password"]:
             raise serializers.ValidationError(
                 {"password": "패스워드가 일치하지 않습니다"}
             )
 
+        # 기존 패스워드와 변경할 패스워드는 상이해야 함
         if attrs["new_password"] == attrs["old_password"]:
             raise serializers.ValidationError(
                 {"password": "기존 패스워드와 동일합니다."}
@@ -72,11 +82,9 @@ class ChangePasswordSerializer(serializers.ModelSerializer):
 
         return attrs
 
+    # 기존 비밀번호를 맞게 입력하였는지 검사
     def validate_old_password(self, value):
         me = self.context
-        print("====================")
-        print(me)
-        print("====================")
         if not me.check_password(value):
             raise serializers.ValidationError("기존 패스워드가 일치하지 않습니다.")
         return value
