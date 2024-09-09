@@ -47,7 +47,7 @@ class ProductDetailAPIView(APIView):
                 serializer.save()
                 return Response(serializer.data)
         else:
-            return Response("수정 권한이 업는 사용자입니다.")
+            return Response("수정 권한이 없는 사용자입니다.")
 
     # 상품 삭제
     def delete(self, request, productID):
@@ -57,7 +57,7 @@ class ProductDetailAPIView(APIView):
             product.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
-            return Response("삭제 권한이 업는 사용자입니다.")
+            return Response("삭제 권한이 없는 사용자입니다.")
 
 
 class ProductLikeView(APIView):
