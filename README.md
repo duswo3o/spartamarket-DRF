@@ -169,25 +169,47 @@
       - endpoint : /api/accounts/password/
       - method : PUT
       - 조건 : 기존 패스워드와 변경할 패스워드는 상이해야 함
+        <details>
+        <summary>비밀번호 변경 실패</summary>
+        <div markdown="1">
+     
+        ![image](./spartamarket-readme-img/changepassword-not-correct.png)
     
-    [//]: # (      ![image]&#40;./spartamarket-readme-img/products-delete.png&#41;)
-      </div>
-      </details>
+        ![image](./spartamarket-readme-img/changepassword-not-correct2.png)
     
-      <details>
-      <summary>회원 탈퇴</summary>
-      <div markdown="1">
+        ![image](./spartamarket-readme-img/changepassword-not-correct3.png)
+   
+        </div>
+        </details>
+        
+        <details>
+          <summary>비밀번호 변경 성공</summary>
+          <div markdown="1">
+       
+          ![image](./spartamarket-readme-img/changepassword-success.png)
+     
+          </div>
+          </details>
+            </div>
+            </details>
+    
+        <details>
+        <summary>회원 탈퇴</summary>
+        <div markdown="1">
   
-      - endpoint : /api/products/
-      - method : DELETE
-      - 조건 : 로그인 상태, 비밀번호 재입력 필요
+        - endpoint : /api/products/
+        - method : DELETE
+        - 조건 : 로그인 상태, 비밀번호 재입력 필요
     
-      상품 삭제 (유효한 사용자)
-[//]: # (      ![image]&#40;./spartamarket-readme-img/products-delete.png&#41;)
-      상품 삭제 불가 (유효하지 않은 사용자)
-[//]: # (      ![image]&#40;./spartamarket-readme-img/products-cannot-delete.png&#41;)
-      </div>
-      </details>
+        회원 탈퇴 실패 (비밀번호 불일치)
+    
+        ![image](./spartamarket-readme-img/account-delete-fail.png)
+    
+        회원 탈퇴 성공 (비밀번호 일치)
+    
+        ![image](./spartamarket-readme-img/account-delete-success.png)
+        </div>
+        </details>
   
   - 데이터베이스 관계 모델링
     <details>
