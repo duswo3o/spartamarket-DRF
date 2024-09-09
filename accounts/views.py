@@ -65,6 +65,8 @@ class Profile(APIView):
                 serializer.save()
                 return Response(serializer.data)
             return Response(serializer.errors)
+        else:
+            return Response({"detail": "수정 권한이 없는 프로필입니다."})
 
 
 class FollowView(APIView):

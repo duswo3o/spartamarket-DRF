@@ -39,11 +39,12 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("이미 존재하는 아이디입니다.")
         return attrs
 
-    def validate_email(self, attrs):
-        email = get_user_model().objects.filter(email=attrs)
+    def validate_email(self, value):
+        user = self.instance
+        email = get_user_model().objects.filter(email=value)
         if email.exists():
             raise serializers.ValidationError("이미 존재하는 이메일입니다.")
-        return attrs
+        return value
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
