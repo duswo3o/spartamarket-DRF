@@ -211,36 +211,36 @@
         </div>
         </details>
   
-  - 데이터베이스 관계 모델링
-    <details>
-        <summary>팔로잉 시스템</summary>
-        <div markdown="1">
+    - 데이터베이스 관계 모델링
+      <details>
+          <summary>팔로잉 시스템</summary>
+          <div markdown="1">
     
-    팔로우하기
+      팔로우하기
     
-      ![image](./spartamarket-readme-img/accounts-follow.png)
+        ![image](./spartamarket-readme-img/accounts-follow.png)
 
-    팔로우 확인
+      팔로우 확인
 
-      ![image](./spartamarket-readme-img/accounts-followinguser.png)
+        ![image](./spartamarket-readme-img/accounts-followinguser.png)
 
-      </div>
-      </details>
+        </div>
+        </details>
     
-    <details>
-        <summary>게시글 좋아요 기능</summary>
-        <div markdown="1">
+      <details>
+          <summary>게시글 좋아요 기능</summary>
+          <div markdown="1">
     
-    좋아요
+      좋아요
     
-      ![image](./spartamarket-readme-img/products-like.png)
+        ![image](./spartamarket-readme-img/products-like.png)
 
-    좋아요 확인
+      좋아요 확인
 
-      ![image](./spartamarket-readme-img/products-likeuser.png)
+        ![image](./spartamarket-readme-img/products-likeuser.png)
 
-      </div>
-      </details>
+        </div>
+        </details>
   
 
 ## 05. 스택
