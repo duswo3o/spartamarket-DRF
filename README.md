@@ -19,7 +19,15 @@
 ## 04. 기능
 - 필수 구현
   - accounts
-    - 회원가입
+    - <details>
+      <summary>회원가입</summary>
+      <div markdown="1">
+      
+        ![image]()
+      
+      </div>
+      </details>
+  
     - 로그인
     - 프로필 조회
   - product
@@ -76,5 +84,3 @@
 
 ## 06. 
 
-
-![image](./얼레벌레_기술스택.jpeg)
