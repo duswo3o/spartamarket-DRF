@@ -20,19 +20,5 @@ class Product(models.Model):
         blank=True,
     )
 
-    tags = models.ManyToManyField(
-        to="products.Hashtag",
-        verbose_name="해시태그 목록",
-        blank=True,
-        related_name="product_tags",
-    )
-
     def __str__(self):
         return self.title
-
-
-class Hashtag(models.Model):
-    tag = models.CharField("tag", max_length=20, unique=True)
-
-    def __str__(self):
-        return self.tag

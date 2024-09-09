@@ -1,10 +1,6 @@
-from django.contrib.auth.hashers import check_password
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
-
-from django.contrib.auth.decorators import login_required
 
 from .serializers import (
     UserSerializer,
@@ -16,11 +12,10 @@ from .serializers import (
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 
-# Create your views here.
 class AccountAPIView(APIView):
 
     # 회원가입
