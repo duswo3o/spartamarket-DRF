@@ -1,3 +1,4 @@
+from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
@@ -48,9 +49,44 @@ class ProfileUpdateSerializer(serializers.ModelSerializer):
 
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
+    new_password = serializers.CharField(
+        write_only=True, required=True, validators=[validate_password]
+    )
+    confirm_password = serializers.CharField(write_only=True, required=True)
+    old_password = serializers.CharField(write_only=True, required=True)
+
     class Meta:
         model = get_user_model()
-        fields = ["password"]
+        fields = ["new_password", "confirm_password", "old_password"]
+
+    def validate(self, attrs):
+        if attrs["new_password"] != attrs["confirm_password"]:
+            raise serializers.ValidationError(
+                {"password": "패스워드가 일치하지 않습니다"}
+            )
+
+        if attrs["new_password"] == attrs["old_password"]:
+            raise serializers.ValidationError(
+                {"password": "기존 패스워드와 동일합니다."}
+            )
+
+        return attrs
+
+    def validate_old_password(self, value):
+        me = self.context
+        print("====================")
+        print(me)
+        print("====================")
+        if not me.check_password(value):
+            raise serializers.ValidationError("기존 패스워드가 일치하지 않습니다.")
+        return value
+
+    def update(self, instance, validated_data):
+
+        instance.set_password(validated_data["new_password"])
+        instance.save()
+
+        return instance
 
 
 class UserDeleteSerializer(serializers.ModelSerializer):

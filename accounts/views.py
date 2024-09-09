@@ -10,6 +10,7 @@ from .serializers import (
     UserSerializer,
     ProfileUpdateSerializer,
     UserDeleteSerializer,
+    ChangePasswordSerializer,
 )
 
 from rest_framework import status
@@ -84,3 +85,19 @@ class FollowView(APIView):
             else:
                 you.followers.add(me)
                 return Response("follow", status=status.HTTP_200_OK)
+
+
+class ChangePasswordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        me = get_user_model().objects.get(id=request.user.id)
+        serializer = ChangePasswordSerializer(
+            instance=me, data=request.data, context=me
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"password": "비밀번호가 변경되었습니다."}, status=status.HTTP_200_OK
+            )
+        return Response(serializer.errors)
