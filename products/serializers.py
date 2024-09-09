@@ -9,4 +9,3 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ("author",)
 
     like_count = serializers.IntegerField(source="like_users.count", read_only=True)
-    tags = HashtagSerializer(many=True, read_only=True)
