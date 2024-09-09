@@ -21,7 +21,6 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 
 # Create your views here.
 class AccountAPIView(APIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
 
     # 회원가입
     def post(self, request):
@@ -32,6 +31,7 @@ class AccountAPIView(APIView):
         return Response(serializer.errors)
 
     # 회원탈퇴
+    @permission_classes(IsAuthenticated)
     def delete(self, request):
         serializer = UserDeleteSerializer(data=request.data)
         if serializer.is_valid():

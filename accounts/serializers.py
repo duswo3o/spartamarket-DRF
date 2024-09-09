@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         # fields = "__all__"
 
         exclude = (
-            "followings",
+            # "followings",
             "groups",
             "user_permissions",
         )
