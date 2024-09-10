@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
@@ -20,7 +21,16 @@ class ProductAPIView(APIView):
     # 상품 목록 조회
     def get(self, request):
         page = request.GET.get("page", "1")
-        products_list = Product.objects.all()
+        search_word = request.GET.get("search_word")
+        if search_word is None:
+            products_list = Product.objects.all()
+        else:
+            products_list = Product.objects.filter(
+                Q(title__icontains=search_word)
+                | Q(
+                    content__icontains=search_word
+                )  # 제목 또는 내용에 포함되어 있는 경우 검색 가능
+            ).distinct()
         paginator = Paginator(products_list, 10)
         if int(page) <= paginator.num_pages:
             products = paginator.get_page(page)

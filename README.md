@@ -211,6 +211,19 @@
         </div>
         </details>
   
+    - 상품 관련 기능 및 조건
+      <details>
+          <summary>페이지네이션 및 필터링</summary>
+          <div markdown="1">
+    
+      제목, 내용으로 필터링이 가능하고 결과는 페이지네이션으로 관리<br>
+      페이지 번호와 검색어는 쿼리스트링을 통해 전달함
+    
+        ![image](./spartamarket-readme-img/products-search.png)
+
+        </div>
+        </details>
+  
     - 데이터베이스 관계 모델링
       <details>
           <summary>팔로잉 시스템</summary>
